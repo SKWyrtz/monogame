@@ -7,4 +7,10 @@ namespace FirstGame
         water,
         mountain
     }
+
+    public enum UnitType
+    {
+        player,
+        enemy
+    }
 }

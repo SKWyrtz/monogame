@@ -8,18 +8,18 @@ namespace FirstGame
     {
         public TileType TileType { get; set; }
         public Texture2D TileTexture { get; set; }
-        public Rectangle RenderRectangle { get; set; }
-        public GrassTile(Rectangle renderRectangle,Texture2D grassTileTexture)
+        public Rectangle DrawingBounds { get; set; }
+        public GrassTile(Rectangle renderRectangle)
         {
             TileType = TileType.grass;
-            TileTexture = grassTileTexture;
-            RenderRectangle = renderRectangle;
+            TileTexture = Game.grassTileTexture;
+            DrawingBounds = renderRectangle;
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
                     texture: TileTexture,
-                    destinationRectangle: RenderRectangle, //TODO: Casting might create trouble? something with "snapped"
+                    destinationRectangle: DrawingBounds, //TODO: Casting might create trouble? something with "snapped"
                     null,
                     color: Color.White,
                     rotation: 0f,

@@ -13,13 +13,15 @@ namespace FirstGame
         public static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private TileMap tilesMap;
-        //private Dictionary<Vector2, ITile> tilesMap;
+        private WorldTiles worldTiles;
+        private WorldUnits worldUnits;
 
         public static Texture2D grassTileTexture;
         public static Texture2D waterTileTexture;
         public static Texture2D mountainTileTexture;
         public static Texture2D tempPlayerTexture;
+
+        private Vector2 playerPos;
 
         public Game()
         {
@@ -31,10 +33,11 @@ namespace FirstGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            //tilesMap = new Dictionary<Vector2, ITile>();
-            tilesMap = new TileMap();
+            worldTiles = new WorldTiles();
+            worldUnits = new WorldUnits();
 
-            int[,] map = new int[,] {
+
+            int[,] worldLayout = new int[,] {
             {0,0,0,2,2,1,1,1,1,1,1,0,0,0,0 },
             {0,0,0,0,0,1,1,1,1,1,1,0,0,0,0 },
             {0,0,0,0,0,0,1,1,1,2,2,0,0,0,0 },
@@ -44,12 +47,15 @@ namespace FirstGame
             {0,0,0,1,1,0,2,2,0,0,0,1,0,0,0 },
             {0,0,1,1,1,1,0,0,0,0,1,1,1,0,0 }
             };
-            GameConstants.MAP_WIDTH = map.GetLength(1);
-            GameConstants.MAP_HEIGHT = map.GetLength(0);
+            GameConstants.MAP_WIDTH = worldLayout.GetLength(1);
+            GameConstants.MAP_HEIGHT = worldLayout.GetLength(0);
 
             base.Initialize();
 
-            tilesMap.GenerateMap(map);
+            worldTiles.GenerateWorldTiles(worldLayout);
+
+            Rectangle targetRenderRectangle = worldTiles.GetTile(new Vector2(0, 0)).DrawingBounds;
+            worldUnits.AddUnit(new Vector2(0,0), new TempPlayerUnit(targetRenderRectangle));
         }
 
         protected override void LoadContent()  //Initialize is called before LoadContent
@@ -69,6 +75,18 @@ namespace FirstGame
                 Exit();
 
             // TODO: Add your update logic here
+            var kstate = Keyboard.GetState();
+            var mouseState = Mouse.GetState();
+
+            if (kstate.IsKeyDown(Keys.Down))
+            {
+                playerPos.Y++;
+            }
+
+            if (mouseState.LeftButton == ButtonState.Pressed)
+            {
+                InputHandler.HandleMouseclick(mouseState.Position);
+            }
 
             base.Update(gameTime);
         }
@@ -79,21 +97,15 @@ namespace FirstGame
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            foreach (KeyValuePair<Vector2, ITile> tile in tilesMap.tilesMapDictionary)
+            foreach (KeyValuePair<Vector2, ITile> tile in worldTiles.tilesMap)
             {
                 tile.Value.Draw(_spriteBatch);
             }
-            Rectangle targetRenderRectangle = tilesMap.GetTile(new Vector2(0, 0)).RenderRectangle;
-            _spriteBatch.Draw(
-                tempPlayerTexture,
-                targetRenderRectangle,
-                null,
-                Color.White,
-                0f,
-                origin: new Vector2(tempPlayerTexture.Width / 2, tempPlayerTexture.Height / 2),
-                effects: SpriteEffects.None,
-                layerDepth: 1f
-            );
+            foreach (KeyValuePair<Vector2, IUnit> unit in worldUnits.unitMap)
+            {
+                unit.Value.Draw(_spriteBatch);
+            }
+
             _spriteBatch.End();
 
             base.Draw(gameTime);

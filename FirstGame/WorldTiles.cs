@@ -3,22 +3,19 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FirstGame
 {
-    internal class TileMap
+    internal class WorldTiles
     {
-        public Dictionary<Vector2, ITile> tilesMapDictionary { get; set;}
+        public Dictionary<Vector2, ITile> tilesMap { get; set;}
 
-        public TileMap()
+        public WorldTiles()
         {
-            tilesMapDictionary = new Dictionary<Vector2, ITile>();    
+            tilesMap = new Dictionary<Vector2, ITile>();    
         }
 
-        public void GenerateMap(int[,] map)
+        public void GenerateWorldTiles(int[,] map)
         {
             for (int x = 0; x < map.GetLength(1); x++)
             {
@@ -42,26 +39,26 @@ namespace FirstGame
                     switch (tileType)
                     {
                         case (int)TileType.grass:
-                            tile = new GrassTile(renderRectangle, Game.grassTileTexture);
+                            tile = new GrassTile(renderRectangle);
                             break;
                         case (int)TileType.water:
-                            tile = new WaterTile(renderRectangle, Game.waterTileTexture);
+                            tile = new WaterTile(renderRectangle);
                             break;
                         case (int)TileType.mountain:
-                            tile = new MountainTile(renderRectangle, Game.mountainTileTexture);
+                            tile = new MountainTile(renderRectangle);
                             break;
                         default:
-                            tile = new GrassTile(renderRectangle, Game.grassTileTexture);
+                            tile = new GrassTile(renderRectangle);
                             break;
                     }
-                    tilesMapDictionary.Add(position, tile);
+                    tilesMap.Add(position, tile);
                 }
             }
         }
 
         internal ITile GetTile(Vector2 position)
         {
-            if (tilesMapDictionary.TryGetValue(position, out ITile tile)) {
+            if (tilesMap.TryGetValue(position, out ITile tile)) {
                 return tile;
             } else
             {
