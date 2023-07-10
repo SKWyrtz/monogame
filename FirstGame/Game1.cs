@@ -74,29 +74,9 @@ namespace FirstGame
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
-            foreach (KeyValuePair<Vector2, ITile> entry in tilesMap)
+            foreach (KeyValuePair<Vector2, ITile> tile in tilesMap)
             {
-                float xPos = entry.Key.X;
-                float yPos = entry.Key.Y;
-                ITile tile = entry.Value;
-                Texture2D texture = tile.TileTexture;
-                
-                int boardWidth = _graphics.PreferredBackBufferWidth - 50;
-                int boardHeight = _graphics.PreferredBackBufferHeight - 50;
-                int tileWidth = boardWidth / GameConstants.MAP_WIDTH;
-                //int tileHeight = boardHeight / GameConstants.MAP_HEIGHT; //måske ikke bruges
-                int renderXPos = (int)(25 + tileWidth / 2 + (xPos * tileWidth));
-                int renderYPos = (int)(tileWidth / 2 + (yPos * tileWidth));
-                _spriteBatch.Draw(
-                    texture: texture,
-                    destinationRectangle: new Rectangle(renderXPos, renderYPos, tileWidth - 2, tileWidth - 2), //TODO: Casting might create trouble? something with "snapped"
-                    null,
-                    color: Color.White,
-                    rotation: 0f,
-                    origin: new Vector2(texture.Width / 2, texture.Height / 2),
-                    effects: SpriteEffects.None,
-                    layerDepth: 0f
-                );
+                tile.Value.Draw(_spriteBatch);
             }
             _spriteBatch.End();
 
@@ -111,21 +91,32 @@ namespace FirstGame
                 {
                     Vector2 position = new Vector2(x, y);
 
+                    float xPos = x;
+                    float yPos = y;
+
+                    int boardWidth = _graphics.PreferredBackBufferWidth - 50;
+                    int boardHeight = _graphics.PreferredBackBufferHeight - 50;
+                    int tileWidth = boardWidth / GameConstants.MAP_WIDTH;
+                    //int tileHeight = boardHeight / GameConstants.MAP_HEIGHT; //måske ikke bruges
+                    int renderXPos = (int)(25 + tileWidth / 2 + (xPos * tileWidth));
+                    int renderYPos = (int)(tileWidth / 2 + (yPos * tileWidth));
+                    Rectangle renderRectangle = new Rectangle(renderXPos, renderYPos, tileWidth - 2, tileWidth - 2);
+
                     ITile tile;
                     int tileType = map[y, x];
                     switch (tileType)
                     {
                         case (int)TileType.grass:
-                            tile = new GrassTile(grassTileTexture);
+                            tile = new GrassTile(renderRectangle, grassTileTexture);
                             break;
                         case (int)TileType.water:
-                            tile = new WaterTile(waterTileTexture);
+                            tile = new WaterTile(renderRectangle, waterTileTexture);
                             break;
                         case (int)TileType.mountain:
-                            tile = new MountainTile(mountainTileTexture);
+                            tile = new MountainTile(renderRectangle, mountainTileTexture);
                             break;
                         default:
-                            tile = new GrassTile(grassTileTexture);
+                            tile = new GrassTile(renderRectangle, grassTileTexture);
                             break;
                     }
                     tilesMap.Add(position, tile);

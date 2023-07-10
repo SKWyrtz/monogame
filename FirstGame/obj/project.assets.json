@@ -102,19 +102,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sigurd\\.nuget\\packages\\": {}
+    "C:\\Users\\Repsa\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sigurd\\Projects\\monogame\\FirstGame\\FirstGame.csproj",
+      "projectUniqueName": "C:\\Users\\Repsa\\Projects\\monogame\\FirstGame\\FirstGame.csproj",
       "projectName": "FirstGame",
-      "projectPath": "C:\\Users\\Sigurd\\Projects\\monogame\\FirstGame\\FirstGame.csproj",
-      "packagesPath": "C:\\Users\\Sigurd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sigurd\\Projects\\monogame\\FirstGame\\obj\\",
+      "projectPath": "C:\\Users\\Repsa\\Projects\\monogame\\FirstGame\\FirstGame.csproj",
+      "packagesPath": "C:\\Users\\Repsa\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Repsa\\Projects\\monogame\\FirstGame\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sigurd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Repsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

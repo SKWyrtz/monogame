@@ -1,4 +1,1 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/grass-tile.png","C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/bin/DesktopGL/Content/grass-tile.xnb","TextureProcessor","Texture2DContent",770506,1048661,0.1225543
-"C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/mountain-tile.png","C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/bin/DesktopGL/Content/mountain-tile.xnb","TextureProcessor","Texture2DContent",76401,1048661,0.1266624
-"C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/water-tile.jpg","C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/bin/DesktopGL/Content/water-tile.xnb","TextureProcessor","Texture2DContent",232475,4194389,0.2041277

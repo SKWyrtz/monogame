@@ -1,4 +1,5 @@
 ﻿using FirstGame.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstGame
@@ -7,12 +8,26 @@ namespace FirstGame
     {
         public TileType TileType { get; set; }
         public Texture2D TileTexture { get; set; }
-
-        public GrassTile(Texture2D grassTileTexture)
+        public Rectangle RenderRectangle { get; set; }
+        public GrassTile(Rectangle renderRectangle,Texture2D grassTileTexture)
         {
             TileType = TileType.grass;
             TileTexture = grassTileTexture;
+            RenderRectangle = renderRectangle;
         }
-        
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(
+                    texture: TileTexture,
+                    destinationRectangle: RenderRectangle, //TODO: Casting might create trouble? something with "snapped"
+                    null,
+                    color: Color.White,
+                    rotation: 0f,
+                    origin: new Vector2(TileTexture.Width / 2, TileTexture.Height / 2),
+                    effects: SpriteEffects.None,
+                    layerDepth: 0f
+                );
+        }
+
     }
 }
