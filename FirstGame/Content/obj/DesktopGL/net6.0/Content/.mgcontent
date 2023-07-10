@@ -6,9 +6,11 @@
   <SourceFiles>
     <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/grass-tile.png</File>
     <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/mountain-tile.png</File>
+    <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/temp-player.png</File>
     <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/water-tile.jpg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

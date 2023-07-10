@@ -54,3 +54,4 @@ C:\Users\Repsa\Projects\monogame\FirstGame\obj\Debug\net6.0\refint\FirstGame.dll
 C:\Users\Repsa\Projects\monogame\FirstGame\obj\Debug\net6.0\FirstGame.pdb
 C:\Users\Repsa\Projects\monogame\FirstGame\obj\Debug\net6.0\FirstGame.genruntimeconfig.cache
 C:\Users\Repsa\Projects\monogame\FirstGame\obj\Debug\net6.0\ref\FirstGame.dll
+C:\Users\Repsa\Projects\monogame\FirstGame\bin\Debug\net6.0\Content\temp-player.xnb
