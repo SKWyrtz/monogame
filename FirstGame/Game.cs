@@ -13,8 +13,8 @@ namespace FirstGame
         public static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private WorldTiles worldTiles;
-        private WorldUnits worldUnits;
+        public static WorldTiles worldTiles;
+        public static WorldUnits worldUnits;
 
         public static Texture2D grassTileTexture;
         public static Texture2D waterTileTexture;
@@ -22,6 +22,7 @@ namespace FirstGame
         public static Texture2D tempPlayerTexture;
 
         private Vector2 playerPos;
+        public static bool unitIsSelected;
 
         public Game()
         {
@@ -54,6 +55,7 @@ namespace FirstGame
 
             worldTiles.GenerateWorldTiles(worldLayout);
 
+            unitIsSelected = false;
             Rectangle targetRenderRectangle = worldTiles.GetTile(new Vector2(0, 0)).DrawingBounds;
             worldUnits.AddUnit(new Vector2(0,0), new TempPlayerUnit(targetRenderRectangle));
         }
@@ -83,7 +85,8 @@ namespace FirstGame
                 playerPos.Y++;
             }
 
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            InputHandler.GetMouseState(); 
+            if (InputHandler.MouseHasBeenPressedOnce())
             {
                 InputHandler.HandleMouseclick(mouseState.Position);
             }
@@ -97,10 +100,14 @@ namespace FirstGame
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
+
+            //Draw tiles
             foreach (KeyValuePair<Vector2, ITile> tile in worldTiles.tilesMap)
             {
                 tile.Value.Draw(_spriteBatch);
             }
+
+            //Draw units
             foreach (KeyValuePair<Vector2, IUnit> unit in worldUnits.unitMap)
             {
                 unit.Value.Draw(_spriteBatch);

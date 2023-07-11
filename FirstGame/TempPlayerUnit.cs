@@ -4,11 +4,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace FirstGame
 {
-    internal class TempPlayerUnit : IUnit
+    internal class TempPlayerUnit : AbstractUnit, IUnit
     {
-        public UnitType UnitType { get; set; }
-        public Texture2D UnitTexture { get; set; }
-        public Rectangle DrawingBounds { get; set; }
+        public override UnitType UnitType { get; set; }
+        public override Texture2D UnitTexture { get; set; }
+        public override Rectangle DrawingBounds { get; set; }
         public TempPlayerUnit(Rectangle renderRectangle)
         {
             UnitType = UnitType.player;
@@ -16,18 +16,9 @@ namespace FirstGame
             DrawingBounds = renderRectangle;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(
-                UnitTexture,
-                DrawingBounds,
-                null,
-                Color.White,
-                0f,
-                origin: new Vector2(UnitTexture.Width / 2, UnitTexture.Height / 2),
-                effects: SpriteEffects.None,
-                layerDepth: 1f
-            );
-        }
+        //public void Draw(SpriteBatch spriteBatch)
+        //{
+        //    base.Draw(spriteBatch);
+        //}
     }
 }

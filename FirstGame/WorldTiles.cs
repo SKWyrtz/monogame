@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace FirstGame
 {
-    internal class WorldTiles
+    public class WorldTiles
     {
         public Dictionary<Vector2, ITile> tilesMap { get; set;}
 
