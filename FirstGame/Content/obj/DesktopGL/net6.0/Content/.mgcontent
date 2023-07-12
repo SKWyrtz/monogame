@@ -4,11 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/grass-tile.png</File>
-    <File>C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/mountain-tile.png</File>
-    <File>C:/Users/Sigurd/Projects/MonoGame/FirstGame/Content/water-tile.jpg</File>
+    <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/grass-tile.png</File>
+    <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/mountain-tile.png</File>
+    <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/temp-player.png</File>
+    <File>C:/Users/Repsa/Projects/monogame/FirstGame/Content/water-tile.jpg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace FirstGame.Interfaces
 {
@@ -11,6 +7,9 @@ namespace FirstGame.Interfaces
     {
         TileType TileType { get; set; }
         Texture2D TileTexture { get; set; }
+        Rectangle DrawingBounds { get; set; }
+
+        void Draw(SpriteBatch spriteBatch);
     }
 }
 
