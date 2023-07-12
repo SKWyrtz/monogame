@@ -8,6 +8,7 @@ namespace FirstGame.Interfaces
         UnitType UnitType { get; set; } 
         Texture2D UnitTexture { get; set; }
         Rectangle DrawingBounds { get; set; }
+        Color Color { get; set; }
 
         void Draw(SpriteBatch spriteBatch);
     }

@@ -1,4 +1,5 @@
 ﻿using FirstGame.Interfaces;
+using FirstGame.Units;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -56,8 +57,8 @@ namespace FirstGame
             worldTiles.GenerateWorldTiles(worldLayout);
 
             unitIsSelected = false;
-            Rectangle targetRenderRectangle = worldTiles.GetTile(new Vector2(0, 0)).DrawingBounds;
-            worldUnits.AddUnit(new Vector2(0,0), new TempPlayerUnit(targetRenderRectangle));
+            Rectangle targetRenderRectangle = worldTiles.GetTile(new Point(0, 0)).DrawingBounds;
+            worldUnits.AddUnit(new Point(0,0), new TempPlayerUnit(targetRenderRectangle));
         }
 
         protected override void LoadContent()  //Initialize is called before LoadContent
@@ -99,16 +100,20 @@ namespace FirstGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+            //RasterizerState state = new RasterizerState();
+            //state.FillMode = FillMode.WireFrame;
+            //_spriteBatch.GraphicsDevice.RasterizerState = state;
+
 
             //Draw tiles
-            foreach (KeyValuePair<Vector2, ITile> tile in worldTiles.tilesMap)
+            foreach (KeyValuePair<Point, ITile> tile in worldTiles.tilesMap)
             {
                 tile.Value.Draw(_spriteBatch);
             }
 
             //Draw units
-            foreach (KeyValuePair<Vector2, IUnit> unit in worldUnits.unitMap)
+            foreach (KeyValuePair<Point, IUnit> unit in worldUnits.unitMap)
             {
                 unit.Value.Draw(_spriteBatch);
             }

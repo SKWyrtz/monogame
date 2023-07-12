@@ -1,4 +1,5 @@
 ﻿using FirstGame.Interfaces;
+using FirstGame.Tile;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,11 @@ namespace FirstGame
 {
     public class WorldTiles
     {
-        public Dictionary<Vector2, ITile> tilesMap { get; set;}
+        public Dictionary<Point, ITile> tilesMap { get; set;}
 
         public WorldTiles()
         {
-            tilesMap = new Dictionary<Vector2, ITile>();    
+            tilesMap = new Dictionary<Point, ITile>();    
         }
 
         public void GenerateWorldTiles(int[,] map)
@@ -21,7 +22,7 @@ namespace FirstGame
             {
                 for (int y = 0; y < map.GetLength(0); y++)
                 {
-                    Vector2 position = new Vector2(x, y);
+                    Point position = new Point(x, y);
 
                     float xPos = x;
                     float yPos = y;
@@ -56,7 +57,7 @@ namespace FirstGame
             }
         }
 
-        internal ITile GetTile(Vector2 position)
+        internal ITile GetTile(Point position)
         {
             if (tilesMap.TryGetValue(position, out ITile tile)) {
                 return tile;
@@ -65,6 +66,18 @@ namespace FirstGame
                 Debug.WriteLine("Tile not found - returning null");
                 return null;
             }
+        }
+
+        internal ITile GetTileFromMouseClick(Point mousePos)
+        {
+            foreach (var tile in tilesMap.Values)
+            {
+                if (tile.DrawingBounds.Contains(mousePos.X, mousePos.Y))
+                {
+                    return tile;
+                }
+            }
+            return null;
         }
     }
 }

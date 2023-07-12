@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FirstGame.Interfaces;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace FirstGame
 {
+    //Handling Input (Click on objects) https://community.monogame.net/t/handling-input-click-on-objects/8848
     internal class InputHandler { 
 
         public static MouseState curMouseState;
@@ -12,17 +14,21 @@ namespace FirstGame
         private static bool unitIsSelected { get; set; }
         public static void HandleMouseclick(Point mousePos)
         {
+
+
             //if (UIManager.CheckMousClick(mousePos))
             //    return;
 
             //if (WorldObjects.CheckMousClick(mousePos))
             //    return;
 
-            if (Game.worldUnits.CheckMouseClick(mousePos))
+
+            if (Game.worldUnits.CheckMouseClick(mousePos)) //Select a unit if on mousePos
             {
                 return;
             }
         }
+
 
         public static MouseState GetMouseState()
         {
@@ -31,11 +37,6 @@ namespace FirstGame
             return curMouseState;
         }
 
-        //public static bool MouseIsPressed(Keys key)
-        //{
-        //    return curMouseState.IsKeyDown(key);
-        //}
-
         public static bool MouseHasBeenPressedOnce()
         {
             if (curMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
@@ -43,10 +44,5 @@ namespace FirstGame
             else
                 return false;
         }
-
-        //public static bool IsLeftMouseClick()
-        //{
-        //    return curMouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released;
-        //}
     }
 }
