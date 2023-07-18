@@ -10,20 +10,18 @@ namespace FirstGame
 
         public static MouseState curMouseState;
         public static MouseState prevMouseState;
-        private static Point selectedUnitPos { get; set; }
-        private static bool unitIsSelected { get; set; }
         public static void HandleMouseclick(Point mousePos)
         {
 
 
-            //if (UIManager.CheckMousClick(mousePos))
-            //    return;
+            if (Game.UIManager.CheckMousClick(mousePos))
+                return;
 
             //if (WorldObjects.CheckMousClick(mousePos))
             //    return;
 
 
-            if (Game.worldUnits.CheckMouseClick(mousePos)) //Select a unit if on mousePos
+            if (Game.WorldUnits.CheckMouseClick(mousePos)) //Select a unit if on mousePos
             {
                 return;
             }

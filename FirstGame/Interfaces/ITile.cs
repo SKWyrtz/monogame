@@ -8,7 +8,7 @@ namespace FirstGame.Interfaces
         TileType TileType { get; set; }
         Texture2D TileTexture { get; set; }
         Rectangle DrawingBounds { get; set; }
-
+        Color Color { get; set; }
         void Draw(SpriteBatch spriteBatch);
     }
 }

@@ -9,11 +9,13 @@ namespace FirstGame.Tile
         public override TileType TileType { get; set; }
         public override Texture2D TileTexture { get; set; }
         public override Rectangle DrawingBounds { get; set; }
+        public override Color Color { get; set; }
         public WaterTile(Rectangle renderRectangle)
         {
             TileType = TileType.water;
             TileTexture = Game.waterTileTexture;
             DrawingBounds = renderRectangle;
+            Color = Color.White;
         }
     }
 }

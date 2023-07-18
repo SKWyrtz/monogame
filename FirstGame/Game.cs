@@ -14,16 +14,16 @@ namespace FirstGame
         public static GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        public static WorldTiles worldTiles;
-        public static WorldUnits worldUnits;
+        public static WorldTiles WorldTiles;
+        public static WorldUnits WorldUnits;
+        public static UIManager UIManager;
 
         public static Texture2D grassTileTexture;
         public static Texture2D waterTileTexture;
         public static Texture2D mountainTileTexture;
         public static Texture2D tempPlayerTexture;
 
-        private Vector2 playerPos;
-        public static bool unitIsSelected;
+        public static Texture2D nextTurnUITexture;
 
         public Game()
         {
@@ -35,8 +35,9 @@ namespace FirstGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            worldTiles = new WorldTiles();
-            worldUnits = new WorldUnits();
+            WorldTiles = new WorldTiles();
+            WorldUnits = new WorldUnits();
+            UIManager = new UIManager();
 
 
             int[,] worldLayout = new int[,] {
@@ -54,11 +55,12 @@ namespace FirstGame
 
             base.Initialize();
 
-            worldTiles.GenerateWorldTiles(worldLayout);
+            UIManager.GenerateUIElements();
+            WorldTiles.GenerateWorldTiles(worldLayout);
 
-            unitIsSelected = false;
-            Rectangle targetRenderRectangle = worldTiles.GetTile(new Point(0, 0)).DrawingBounds;
-            worldUnits.AddUnit(new Point(0,0), new TempPlayerUnit(targetRenderRectangle));
+
+            Rectangle targetRenderRectangle = WorldTiles.GetTileAt(new Point(3, 3)).DrawingBounds;
+            WorldUnits.AddUnit(new Point(3,3), new TempPlayerUnit(targetRenderRectangle));
         }
 
         protected override void LoadContent()  //Initialize is called before LoadContent
@@ -70,6 +72,8 @@ namespace FirstGame
             waterTileTexture = Content.Load<Texture2D>("water-tile");
             mountainTileTexture = Content.Load<Texture2D>("mountain-tile");
             tempPlayerTexture = Content.Load<Texture2D>("temp-player");
+
+            nextTurnUITexture = Content.Load<Texture2D>("next-turn-button");
         }
 
         protected override void Update(GameTime gameTime)
@@ -78,13 +82,7 @@ namespace FirstGame
                 Exit();
 
             // TODO: Add your update logic here
-            var kstate = Keyboard.GetState();
             var mouseState = Mouse.GetState();
-
-            if (kstate.IsKeyDown(Keys.Down))
-            {
-                playerPos.Y++;
-            }
 
             InputHandler.GetMouseState(); 
             if (InputHandler.MouseHasBeenPressedOnce())
@@ -107,16 +105,23 @@ namespace FirstGame
 
 
             //Draw tiles
-            foreach (KeyValuePair<Point, ITile> tile in worldTiles.tilesMap)
+            foreach (KeyValuePair<Point, ITile> tile in WorldTiles.tilesMap)
             {
                 tile.Value.Draw(_spriteBatch);
             }
 
             //Draw units
-            foreach (KeyValuePair<Point, IUnit> unit in worldUnits.unitMap)
+            foreach (KeyValuePair<Point, IUnit> unit in WorldUnits.unitMap)
             {
                 unit.Value.Draw(_spriteBatch);
             }
+
+            //Draw UI
+            foreach (KeyValuePair<Point, IUIELement> uiElement in UIManager.uiElementsMap)
+            {
+                uiElement.Value.Draw(_spriteBatch);
+            }
+
 
             _spriteBatch.End();
 

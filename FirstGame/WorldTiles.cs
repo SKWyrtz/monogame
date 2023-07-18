@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace FirstGame
 {
@@ -57,7 +58,7 @@ namespace FirstGame
             }
         }
 
-        internal ITile GetTile(Point position)
+        internal ITile GetTileAt(Point position)
         {
             if (tilesMap.TryGetValue(position, out ITile tile)) {
                 return tile;
@@ -66,6 +67,11 @@ namespace FirstGame
                 Debug.WriteLine("Tile not found - returning null");
                 return null;
             }
+        }
+
+        internal Point GetPointFromTile(ITile tile)
+        {
+            return tilesMap.FirstOrDefault(x => x.Value == tile).Key;
         }
 
         internal ITile GetTileFromMouseClick(Point mousePos)
@@ -78,6 +84,15 @@ namespace FirstGame
                 }
             }
             return null;
+        }
+
+        internal void ChangeTilesColor(List<Point> selectedUnitPossibleMoves, Color color)
+        {
+            foreach (Point targetIndex in selectedUnitPossibleMoves)
+            {
+                ITile targetTile = GetTileAt(targetIndex);
+                targetTile.Color = color;
+            }
         }
     }
 }

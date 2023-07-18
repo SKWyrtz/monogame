@@ -9,6 +9,7 @@ namespace FirstGame.Tile
         public abstract TileType TileType {get;set;}
         public abstract Texture2D TileTexture { get; set; }
         public abstract Rectangle DrawingBounds { get; set; }
+        public abstract Color Color { get; set; }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -16,7 +17,7 @@ namespace FirstGame.Tile
                     texture: TileTexture,
                     destinationRectangle: DrawingBounds,
                     null,
-                    color: Color.White,
+                    color: Color,
                     rotation: 0f,
                     origin: new Vector2(0, 0),
                     effects: SpriteEffects.None,
