@@ -14,6 +14,8 @@ namespace FirstGame.UI
         public abstract Texture2D UITexture2D { get; set; }
         public abstract Rectangle DrawingBounds { get; set; }
 
+        public abstract void Activate(); 
+
         public void Draw(SpriteBatch spriteBatch)
         {
         spriteBatch.Draw(
