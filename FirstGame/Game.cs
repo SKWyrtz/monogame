@@ -25,6 +25,8 @@ namespace FirstGame
 
         public static Texture2D nextTurnUITexture;
 
+        public static Player CurrentPlayer;
+
         public Game()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -65,7 +67,10 @@ namespace FirstGame
 
 
             Rectangle targetRenderRectangle = WorldTiles.GetTileAt(new Point(3, 3)).DrawingBounds;
-            WorldUnits.AddUnit(new Point(3,3), new TempPlayerUnit(targetRenderRectangle));
+            WorldUnits.AddUnit(new Point(3,3), new TempPlayerUnit(WorldTiles.GetTileAt(new Point(3, 3)).DrawingBounds, Player.player2));
+            WorldUnits.AddUnit(new Point(10, 6), new TempPlayerUnit(WorldTiles.GetTileAt(new Point(10, 6)).DrawingBounds, Player.player1));
+
+            CurrentPlayer = Player.player1;
         }
 
         protected override void LoadContent()  //Initialize is called before LoadContent
@@ -127,13 +132,22 @@ namespace FirstGame
                 unit.Value.Draw(_spriteBatch);
             }
 
-
-
-
             _spriteBatch.End();
 
             base.Draw(gameTime);
 
+        }
+
+        public static void NextTurn()
+        {
+            if (CurrentPlayer == Player.player1)
+            {
+                CurrentPlayer = Player.player2;
+            }
+            else
+            {
+                CurrentPlayer = Player.player1;
+            }
         }
 
     }

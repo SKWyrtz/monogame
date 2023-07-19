@@ -21,16 +21,18 @@ namespace FirstGame
 
         public bool CheckMouseClick(Point mousePos)
         {
+
             if(selectedUnit == null) //If no unit is selected
             {
                 IUnit unit = GetUnitFromMouseClick(mousePos);
                 if (unit == null) return false;
+                if(unit.Owner != Game.CurrentPlayer) return false; //If the unit is not owned by the current player
                 SelectUnit(unit);
-                Debug.WriteLine("Unit clicked");
                 return true;
             } 
             else //If a unit is selected
             {
+                if (selectedUnit.Owner != Game.CurrentPlayer) return false; //If the selected unit is not owned by the current player
                 if (selectedUnit.DrawingBounds.Contains(mousePos)) //If the selected unit is clicked again
                 {
                     DeselectUnit();
@@ -79,14 +81,12 @@ namespace FirstGame
 
         private bool IsValidMove(Point targetIndex)
         {
-
             if (unitMap.ContainsKey(targetIndex)) return false; //If there is a unit on the target tile
 
             ITile targetTile = Game.WorldTiles.GetTileAt(targetIndex);
             if (targetTile.TileType == TileType.water || targetTile.TileType == TileType.mountain) return false; //If the target tile is water or mountain
 
-            return true;    
-            //return selectedUnitPossibleMoves.Contains(targetIndex);
+            return true;
         }
 
         public IUnit GetUnitFromMouseClick(Point mousePos)
@@ -123,8 +123,7 @@ namespace FirstGame
         internal void SelectUnit(IUnit unit)
         {
             selectedUnit = unit;
-            selectedUnit.Color = Color.Gray;
-            selectedUnitPossibleMoves = calculatePossibleMoves(unit);
+            selectedUnitPossibleMoves = calculatePossibleMoves(selectedUnit);
             Game.WorldTiles.ChangeTilesColor(selectedUnitPossibleMoves, Color.Gray);
         }
 
@@ -132,7 +131,6 @@ namespace FirstGame
         {
             if (selectedUnit == null) return;
             Game.WorldTiles.ChangeTilesColor(selectedUnitPossibleMoves, Color.White);
-            selectedUnit.Color = Color.White;
             selectedUnit = null;
         }
 
