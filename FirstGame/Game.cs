@@ -34,11 +34,6 @@ namespace FirstGame
 
         protected override void Initialize()
         {
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
-            _graphics.ApplyChanges();
-
-
             // TODO: Add your initialization logic here
             WorldTiles = new WorldTiles();
             WorldUnits = new WorldUnits();
@@ -58,7 +53,7 @@ namespace FirstGame
             GameConstants.MAP_WIDTH = worldLayout.GetLength(1);
             GameConstants.MAP_HEIGHT = worldLayout.GetLength(0);
 
-            base.Initialize(); //TODO: Where to put this?
+            base.Initialize();
 
             UIManager.GenerateUIElements();
             WorldTiles.GenerateWorldTiles(worldLayout);
@@ -103,17 +98,11 @@ namespace FirstGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            _spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
             //RasterizerState state = new RasterizerState();
             //state.FillMode = FillMode.WireFrame;
             //_spriteBatch.GraphicsDevice.RasterizerState = state;
 
-
-            //Draw UI
-            foreach (KeyValuePair<Point, IUIELement> uiElement in UIManager.uiElementsMap)
-            {
-                uiElement.Value.Draw(_spriteBatch);
-            }
 
             //Draw tiles
             foreach (KeyValuePair<Point, ITile> tile in WorldTiles.tilesMap)
@@ -127,7 +116,11 @@ namespace FirstGame
                 unit.Value.Draw(_spriteBatch);
             }
 
-
+            //Draw UI
+            foreach (KeyValuePair<Point, IUIELement> uiElement in UIManager.uiElementsMap)
+            {
+                uiElement.Value.Draw(_spriteBatch);
+            }
 
 
             _spriteBatch.End();

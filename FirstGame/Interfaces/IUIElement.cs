@@ -14,7 +14,5 @@ namespace FirstGame.Interfaces
         Rectangle DrawingBounds { get; set; }
         void Draw(SpriteBatch spriteBatch);
 
-        void Activate();    
-
     }
 }
