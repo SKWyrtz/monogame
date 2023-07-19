@@ -23,6 +23,7 @@ namespace FirstGame.UI
 
         public override void Activate()
         {
+            Game.NextTurn();
             Debug.WriteLine("Next turn button activated");
         }
     }

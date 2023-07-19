@@ -10,6 +10,7 @@ namespace FirstGame.Units
         public abstract Texture2D UnitTexture { get; set; }
         public abstract Rectangle DrawingBounds { get; set; }
         public abstract Color Color { get; set; }
+        public abstract Player Owner { get; set; }
         public abstract int MoveRange { get; set; }
 
         public void Draw(SpriteBatch spriteBatch)

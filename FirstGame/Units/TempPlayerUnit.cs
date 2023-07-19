@@ -11,19 +11,16 @@ namespace FirstGame.Units
         public override Rectangle DrawingBounds { get; set; }
         public override Color Color { get; set; }
         public override int MoveRange { get; set; }
+        public override Player Owner { get; set; }
 
-        public TempPlayerUnit(Rectangle renderRectangle)
+        public TempPlayerUnit(Rectangle renderRectangle, Player owner)
         {
             UnitType = UnitType.player;
             UnitTexture = Game.tempPlayerTexture;
             DrawingBounds = renderRectangle;
-            Color = Color.White;
             MoveRange = GameConstants.DEFAULT_MOVE_RANGE;
+            Owner = owner;
+            Color = Utility.GetPlayerColor(owner);
         }
-
-        //public void Draw(SpriteBatch spriteBatch)
-        //{
-        //    base.Draw(spriteBatch);
-        //}
     }
 }
