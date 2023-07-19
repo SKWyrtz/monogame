@@ -28,11 +28,11 @@ namespace FirstGame
                     float xPos = x;
                     float yPos = y;
 
-                    int boardWidth = Game._graphics.PreferredBackBufferWidth - 50;
-                    int boardHeight = Game._graphics.PreferredBackBufferHeight - 50;
+                    int boardWidth = Game._graphics.PreferredBackBufferWidth - 250;
+                    int boardHeight = Game._graphics.PreferredBackBufferHeight - 250;
                     int tileWidth = boardWidth / GameConstants.MAP_WIDTH;
                     //int tileHeight = boardHeight / GameConstants.MAP_HEIGHT; //måske ikke bruges
-                    int renderXPos = (int)(25 + tileWidth / 2 + (xPos * tileWidth));
+                    int renderXPos = (int)(tileWidth / 2 + (xPos * tileWidth));
                     int renderYPos = (int)(tileWidth / 2 + (yPos * tileWidth));
                     Rectangle renderRectangle = new Rectangle(renderXPos, renderYPos, tileWidth - 2, tileWidth - 2);
 
