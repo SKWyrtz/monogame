@@ -31,13 +31,15 @@ namespace FirstGame
             {
                 IUnit unit = GetUnitFromMouseClick(mousePos);
                 if (unit == null) return false;
-                if(unit.Owner != Game.CurrentPlayer) return false; //If the unit is not owned by the current player
+                if(unit.Player != Game.CurrentPlayer) return false; //If the unit is not owned by the current player
+                if (unit.CanTakeAction == false) return false; //If the selected unit has already taken an action
                 SelectUnit(unit);
                 return true;
             } 
             else //If a unit is selected
             {
-                if (selectedUnit.Owner != Game.CurrentPlayer) return false; //If the selected unit is not owned by the current player
+                if (selectedUnit.Player != Game.CurrentPlayer) return false; //If the selected unit is not owned by the current player
+                if (selectedUnit.CanTakeAction == false) return false; //If the selected unit has already taken an action
                 if (selectedUnit.DrawingBounds.Contains(mousePos)) //If the selected unit is clicked again
                 {
                     DeselectUnit();
@@ -194,6 +196,9 @@ namespace FirstGame
             unitMap[targetIndex] = unitValue;
 
             selectedUnit.DrawingBounds = targetTile.DrawingBounds;
+
+            selectedUnit.CanTakeAction = false;
+            selectedUnit.Color = Color.Gray;
             DeselectUnit();
         }
 
@@ -201,6 +206,15 @@ namespace FirstGame
         public Point GetPointFromUnit(IUnit unit)
         {
             return unitMap.FirstOrDefault(x => x.Value == unit).Key;
+        }
+
+        internal void ResetUnitActions()
+        {
+            foreach (var unit in unitMap.Values)
+            {
+                unit.CanTakeAction = true;
+                unit.Color = Utility.GetPlayerColor(unit.Player);
+            }
         }
     }
 }

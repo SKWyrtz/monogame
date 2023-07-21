@@ -11,7 +11,7 @@ namespace FirstGame.Units
         public override Rectangle DrawingBounds { get; set; }
         public override Color Color { get; set; }
         public override int MoveRange { get; set; }
-        public override Player Owner { get; set; }
+        public override Player Player { get; set; }
 
         public TempPlayerUnit(Rectangle renderRectangle, Player owner)
         {
@@ -19,7 +19,7 @@ namespace FirstGame.Units
             UnitTexture = Game.tempPlayerTexture;
             DrawingBounds = renderRectangle;
             MoveRange = GameConstants.DEFAULT_MOVE_RANGE;
-            Owner = owner;
+            Player = owner;
             Color = Utility.GetPlayerColor(owner);
         }
     }

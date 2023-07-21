@@ -148,6 +148,7 @@ namespace FirstGame
             {
                 CurrentPlayer = Player.player1;
             }
+            WorldUnits.ResetUnitActions();
         }
 
     }

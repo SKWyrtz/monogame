@@ -9,8 +9,10 @@ namespace FirstGame.Interfaces
         Texture2D UnitTexture { get; set; }
         Rectangle DrawingBounds { get; set; }
         Color Color { get; set; }
-        Player Owner { get; set; } 
+        Player Player { get; set; } 
         int MoveRange { get; set; }
+
+        bool CanTakeAction { get; set; }
 
         void Draw(SpriteBatch spriteBatch);
     }
